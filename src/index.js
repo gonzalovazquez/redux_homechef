@@ -2,14 +2,20 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { persistStore, autoRehydrate } from 'redux-persist';
-
+import { persistStore } from 'redux-persist';
+import { createFilter, createBlacklistFilter } from 'redux-persist-transform-filter';
 
 // Store
 import store from './store';
 
 // Component
 import App from './App';
+
+// you want to store only a subset of your state of reducer one
+const saveSubsetFilter = createFilter(
+  'recipes',
+  ['id', 'keyYouWantToSave2']
+);
 
 export default class AppProvider extends Component {
   constructor(props) {
@@ -18,7 +24,12 @@ export default class AppProvider extends Component {
   }
 
   componentWillMount(){
-    persistStore(store, {}, () => {
+    persistStore(store, { transforms: [
+    saveSubsetFilter,
+    saveSubsetBlacklistFilter,
+    loadSubsetFilter,
+    saveAndloadSubsetFilter,
+  ]}, () => {
       this.setState({ rehydrated: true });
     })
   }

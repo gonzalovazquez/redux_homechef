@@ -15,7 +15,8 @@
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",
-    "redux-persist": "^4.8.0"
+    "redux-persist": "^4.8.0",
+    "redux-persist-transform-filter": "0.0.10"
   },
   "devDependencies": {
     "gh-pages": "^1.0.0",
